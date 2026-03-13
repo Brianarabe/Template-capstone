@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Broker Dashboard</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header>
+    <h2>Broker Dashboard</h2>
+    <p>Welcome {{ user.first_name }} ({{ user.user_type|capfirst }})</p>
+    <form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+</header>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="role-message" data-message="{{ message }}" data-user-type="{{ user.user_type }}"></div>
+    {% endfor %}
+{% endif %}
+
+<main>
+    <p>Manage agents and property listings here.</p>
+</main>
+
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

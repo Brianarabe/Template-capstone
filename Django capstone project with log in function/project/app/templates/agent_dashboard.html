@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Dashboard</title>
+    <!-- Optional: include CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<h1>Agent Dashboard</h1>
+<p>Welcome, {{ user.username }}!</p>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="role-message" data-message="{{ message }}" data-user-type="{{ user.user_type }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<p>You are logged in as <b>Agent</b></p>
+
+<!-- Fixed Home link -->
+<a href="{% url 'base' %}">Home</a>
+
+<form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
+
+</body>
+</html>
